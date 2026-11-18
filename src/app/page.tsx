@@ -1,69 +1,87 @@
-import Image from "next/image";
+import { CompatibilityChart } from "@/components/compatibility-chart";
+
+const steps = [
+  {
+    title: "Post an urgent request",
+    body: "Blood group, units needed and hospital location. It takes 30 seconds.",
+  },
+  {
+    title: "We find matching donors",
+    body: "Compatible, eligible donors within a few km are found instantly using geo search.",
+  },
+  {
+    title: "Donors get alerted",
+    body: "Nearby donors receive an SMS and can accept with one tap. Contact details stay private until they do.",
+  },
+];
 
 export default function Home() {
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert h-5 w-[100px]"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the{" "}
-            <code className="rounded bg-black/[.06] px-1.5 py-0.5 font-mono text-[0.9em] dark:bg-white/[.08]">
-              page.tsx
-            </code>{" "}
-            file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
+    <div className="flex flex-1 flex-col">
+      <header className="mx-auto flex w-full max-w-6xl items-center justify-between px-6 py-5">
+        <span className="text-xl font-bold tracking-tight">
+          <span className="text-brand">●</span> LifeLink
+        </span>
+        <nav className="flex gap-3 text-sm">
+          <a href="#how" className="rounded-full px-4 py-2 hover:bg-red-50">
+            How it works
+          </a>
+          <a href="#chart" className="rounded-full px-4 py-2 hover:bg-red-50">
+            Compatibility
+          </a>
+        </nav>
+      </header>
+
+      <main className="flex-1">
+        <section className="mx-auto max-w-6xl px-6 py-20 text-center sm:py-28">
+          <p className="mb-4 inline-block rounded-full bg-red-100 px-4 py-1 text-sm font-medium text-red-700">
+            Now live in Delhi NCR
           </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert h-[14px] w-4"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={14}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
+          <h1 className="mx-auto max-w-3xl text-4xl font-bold tracking-tight sm:text-6xl">
+            Find a compatible blood donor <span className="text-brand">near you</span>, in minutes.
+          </h1>
+          <p className="mx-auto mt-6 max-w-2xl text-lg text-neutral-600">
+            LifeLink matches urgent blood and plasma requests with eligible donors nearby and alerts
+            them instantly. No more forwarding messages across WhatsApp groups.
+          </p>
+          <div className="mt-10 flex flex-col justify-center gap-4 sm:flex-row">
+            <button className="rounded-full bg-brand px-8 py-3 font-semibold text-white shadow-lg shadow-red-200 hover:bg-red-700">
+              Request blood
+            </button>
+            <button className="rounded-full border border-red-200 bg-white px-8 py-3 font-semibold text-red-700 hover:bg-red-50">
+              Become a donor
+            </button>
+          </div>
+        </section>
+
+        <section id="how" className="mx-auto max-w-6xl px-6 py-16">
+          <h2 className="mb-10 text-center text-3xl font-bold">How it works</h2>
+          <ol className="grid gap-6 sm:grid-cols-3">
+            {steps.map((step, i) => (
+              <li key={step.title} className="rounded-2xl border border-red-100 bg-white p-6 shadow-sm">
+                <span className="flex h-10 w-10 items-center justify-center rounded-full bg-red-100 font-bold text-red-700">
+                  {i + 1}
+                </span>
+                <h3 className="mt-4 text-lg font-semibold">{step.title}</h3>
+                <p className="mt-2 text-neutral-600">{step.body}</p>
+              </li>
+            ))}
+          </ol>
+        </section>
+
+        <section id="chart" className="mx-auto max-w-4xl px-6 py-16">
+          <h2 className="text-center text-3xl font-bold">Who can donate to whom?</h2>
+          <p className="mb-8 mt-3 text-center text-neutral-600">
+            Generated from LifeLink&apos;s matching engine (whole blood). O− is the universal donor,
+            AB+ the universal recipient.
+          </p>
+          <CompatibilityChart />
+        </section>
       </main>
+
+      <footer className="border-t border-red-100 py-8 text-center text-sm text-neutral-500">
+        LifeLink is a portfolio project. Always follow the screening done by a licensed blood bank.
+      </footer>
     </div>
   );
 }
