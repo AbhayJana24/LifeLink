@@ -211,7 +211,12 @@ function getStore(): MemoryStore {
 
 export function isSupabaseConfigured(): boolean {
   const url = process.env.DATABASE_URL;
-  return Boolean(url && !url.includes("[PASSWORD]") && !url.includes("missing-database-url"));
+  return Boolean(
+    url &&
+      !url.includes("[PASSWORD]") &&
+      !url.includes("[YOUR-DATABASE-PASSWORD]") &&
+      !url.includes("missing-database-url"),
+  );
 }
 
 /**
